@@ -1,0 +1,81 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة النقاط المتنقلة</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;  /* تغيير الخلفية */
+        }
+        #score {
+            position: absolute;
+            top: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6347; /* تغيير لون النص إلى اللون البرتقالي */
+        }
+        #target {
+            width: 120px;  /* تكبير الزر */
+            height: 120px;
+            background-color: #32cd32;  /* تغيير لون الزر إلى الأخضر الفاتح */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+            border-radius: 50%;  /* جعل الزر دائري */
+            cursor: pointer;
+            position: absolute;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);  /* إضافة تأثير الظل */
+            transition: transform 0.3s; /* إضافة تأثير الحركة */
+        }
+        #target:hover {
+            transform: scale(1.2);  /* تكبير الزر عندما تمر عليه */
+        }
+    </style>
+</head>
+<body>
+    <div id="score">النقاط: 0</div>
+    <div id="target">اضغط هنا</div>
+
+    <script>
+        let score = 0;
+        const scoreDisplay = document.getElementById('score');
+        const target = document.getElementById('target');
+
+        // تحديث النقاط
+        function updateScore() {
+            score++;
+            scoreDisplay.textContent = "النقاط: " + score;
+        }
+
+        // تحريك الزر إلى مكان عشوائي
+        function moveTarget() {
+            const randomX = Math.random() * (window.innerWidth - 120); // عرض الشاشة - عرض الزر
+            const randomY = Math.random() * (window.innerHeight - 120); // ارتفاع الشاشة - ارتفاع الزر
+
+            target.style.left = randomX + 'px';
+            target.style.top = randomY + 'px';
+        }
+
+        // عند الضغط على الزر، نزيد النقاط ونحرك الزر
+        target.addEventListener('click', () => {
+            updateScore();
+            moveTarget();
+        });
+
+        // تحريك الزر عند تحميل الصفحة
+        moveTarget();
+    </script>
+</body>
+</html>
+
